@@ -1,6 +1,10 @@
 getWS <-
-function(x,y,key){
-    URL <- paste("http://api.walkscore.com/score?lat=",y,"&lon=",x,"&wsapikey=",key,sep="")
+function(address,x,y,key){
+  # ?format=xml&
+  #   address=1119%8th%20Avenue%20Seattle%20WA%2098101&lat=47.6085&
+  #     lon=-122.3295&wsapikey=<YOUR-WSAPIKEY>
+  address <- gsub(" ",'-',address)  
+  URL <- paste("http://api.walkscore.com/score?address=",address,"&lat=",x,"&lon=",y,"&wsapikey=",key,"&transit=1&bike=1",sep="")
     X <- character(0)
     X <- c(X, scan(file = URL, what = "", sep = "\n", quiet = TRUE))
 
